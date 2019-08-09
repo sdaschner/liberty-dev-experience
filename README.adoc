@@ -1,0 +1,31 @@
+== Open Liberty developer experience
+
+How to maximize your Enterprise Java developer experience with Open Liberty.
+
+=== Build and run
+
+You can build the application as follows:
+
+----
+mvn clean package
+docker build -t test .
+docker run --rm -p 9080:9080 test
+----
+
+You can accessing the application as follows:
+
+----
+curl localhost:9080/liberty/greetings/hi
+----
+
+=== Liberty dev mode
+
+----
+mvn liberty:dev
+----
+
+Access the application in a different terminal session, and change the `*.java` source files.
+
+----
+curl localhost:9080/liberty/greetings/hi
+----
