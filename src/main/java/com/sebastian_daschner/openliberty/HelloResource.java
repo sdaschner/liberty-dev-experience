@@ -1,25 +1,24 @@
 package com.sebastian_daschner.openliberty;
 
-import org.eclipse.microprofile.metrics.annotation.Counted;
-
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @Path("greetings")
 public class HelloResource {
 
+    @Inject
+    Hello hello;
+
     @GET
     @Path("hello")
-    @Counted(name = "greetings", tags = "greeting=formal")
     public String hello() {
-        return "Hello";
+        return hello.hello();
     }
 
     @GET
     @Path("hi")
-    @Counted(name = "greetings", tags = "greeting=casual")
     public String hi() {
-        return "Hi!";
+        return hello.hi();
     }
-
 }
