@@ -7,12 +7,11 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class Hello {
 
-    @Counted(name = "greetings", tags = "greeting=formal")
+    @Counted(name = "greetings_hello")
     public String hello() {
         return "Hello";
     }
 
-    @Counted(name = "greetings", tags = "greeting=casual")
     public String hi() {
         return "Hi";
     }

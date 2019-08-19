@@ -10,14 +10,12 @@ import javax.ws.rs.Path;
 public class ConfigResource {
 
     @Inject
-//    @ConfigProperty(name = "mp.metrics.appName", defaultValue = "N/A")
-//    @ConfigProperty(name = "mp.metrics.appName", defaultValue = "N/A")
     @ConfigProperty(name = "greeting", defaultValue = "N/A")
-    String appName;
+    String greeting;
 
     @GET
-    public String test() {
-        return appName;
+    public String config() {
+        return greeting;
     }
 
 }
