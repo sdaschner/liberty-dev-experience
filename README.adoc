@@ -1,31 +1,29 @@
 == Open Liberty developer experience
 
-How to maximize your Enterprise Java developer experience with Open Liberty.
+=== Experimental Docker support
 
-=== Build and run
-
-You can build the application as follows:
+To try out the Docker support, run the following:
 
 ----
-mvn clean package
-docker build -t test .
-docker run --rm -p 9080:9080 test
+./docker-prepare.sh
+./docker-run.sh
 ----
 
-You can accessing the application as follows:
+After the Docker container has started, run the following in a new terminal session:
 
 ----
-curl localhost:9080/liberty/greetings/hi
+./liberty-dev.sh
 ----
 
-=== Liberty dev mode
+Following assumptions are made in the project and container structure:
 
-----
-mvn liberty:dev
-----
+- The `<finalName>` in the `pom.xml` `<build>` is set to the deployment artifact (tested with WAR files)
+- `<applicationManager autoExpand="true"/>` is defined in `server.xml`
+- Liberty home is under `/opt/ol/wlp` (matches the official `open-liberty` images)
 
-Access the application in a different terminal session, and change the `*.java` source files.
 
-----
-curl localhost:9080/liberty/greetings/hi
-----
+=== Known limitations
+
+- Permissions: currently setting file mode to `777` for `target/liberty/wlp`, since Docker container runs with different user
+- Tests are not executed against the updated classes, since the compiled classes now reside under `<server-dir>/apps/expanded/.../WEB-INF/classes`.
+This needs to be fixed.

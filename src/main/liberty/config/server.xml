@@ -7,4 +7,6 @@
     </featureManager>
 
     <mpMetrics authentication="false"/>
+
+    <applicationManager autoExpand="true"/>
 </server>
