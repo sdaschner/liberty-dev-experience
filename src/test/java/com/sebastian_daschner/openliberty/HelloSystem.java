@@ -20,7 +20,7 @@ public class HelloSystem {
     private URI buildUri() {
         String host = System.getProperty("hello.test.host", "localhost");
         String port = System.getProperty("hello.test.port", "9080");
-        return UriBuilder.fromUri("http://{host}:{port}/liberty/").build(host, port);
+        return UriBuilder.fromUri("http://{host}:{port}/hello/").build(host, port);
     }
 
     public String getGreeting(String greeting) {
