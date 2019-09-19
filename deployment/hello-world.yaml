@@ -1,0 +1,80 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world
+spec:
+  selector:
+    app: hello-world
+  ports:
+  - port: 9080
+    name: http
+---
+
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: hello-world
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world
+        version: v1
+    spec:
+      containers:
+      - name: hello-world
+        image: sdaschner/liberty-hello:1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+      restartPolicy: Always
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: hello-world-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hello-world
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - hello-world-gateway
+  http:
+  - route:
+    - destination:
+        host: hello-world
+        port:
+          number: 9080
+        subset: v1
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: hello-world
+spec:
+  host: hello-world
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+---

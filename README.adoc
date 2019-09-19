@@ -15,7 +15,7 @@ docker run --rm -p 9080:9080 test
 You can accessing the application as follows:
 
 ----
-curl localhost:9080/liberty/greetings/hi
+curl localhost:9080/hello/greetings/hi
 ----
 
 === Liberty dev mode
@@ -27,5 +27,5 @@ mvn liberty:dev
 Access the application in a different terminal session, and change the `*.java` source files.
 
 ----
-curl localhost:9080/liberty/greetings/hi
+curl localhost:9080/hello/greetings/hi
 ----

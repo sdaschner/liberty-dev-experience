@@ -2,4 +2,4 @@ FROM open-liberty:javaee8-java12
 
 COPY src/main/liberty/config/server.xml /config/
 
-COPY target/*.war /config/dropins/
+COPY target/hello.war /config/dropins/
