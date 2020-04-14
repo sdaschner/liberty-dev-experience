@@ -7,15 +7,15 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @Path("config")
-public class ConfigResource {
+public class ConfigResources {
 
     @Inject
     @ConfigProperty(name = "greeting")
-    String greeting;
+    String greetings;
 
     @GET
-    public String getConfig() {
-        return greeting;
+    public String config() {
+        return greetings;
     }
 
 }

@@ -1,4 +1,4 @@
-FROM open-liberty:javaee8-java12
+FROM openliberty/open-liberty:full-java13-openj9-ubi
 
 COPY src/main/liberty/config/server.xml /config/
 
